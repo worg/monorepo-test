@@ -1,10 +1,10 @@
 {
   "name": "gh-issues-monorepo",
   "version": "0.1.0",
-  "description": "",
-  "main": " ",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint:all": "npm run --workspaces lint:fix",
+    "prepare": "husky install"
   },
   "author": "Hiram Perez <hi@worg.xyz>",
   "license": "UNLICENSED",
@@ -13,11 +13,17 @@
     "packages/user-stats"
   ],
   "devDependencies": {
+    "eslint": "^8.4.1",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-config-recommended": "^4.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.1.2",
     "prettier": "^2.5.1"
+  },
+  "lint-staged": {
+    ".{ts,tsx,json}": [
+      "eslint",
+      "prettier -w"
+    ]
   }
 }

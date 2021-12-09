@@ -2,9 +2,10 @@
   "name": "issue-viewer",
   "version": "0.1.0",
   "description": "GH Issue Viewer",
-  "main": "src/index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint:fix": "eslint --fix && prettier -w .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "precommit": "lint-staged"
   },
   "author": "Hiram Perez <hi@worg.xyz>",
   "license": "UNLICENSED"
