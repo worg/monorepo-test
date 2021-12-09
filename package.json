@@ -23,7 +23,8 @@
   "lint-staged": {
     ".{ts,tsx,json}": [
       "eslint",
-      "prettier -w"
+      "prettier -w",
+      "git add"
     ]
   }
 }
