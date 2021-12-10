@@ -14,6 +14,7 @@ export interface RepoIssue {
   user: User | null;
   comments: number;
   title: string;
+  body?: string;
   state: string;
   created_at: string;
 }

@@ -1,6 +1,7 @@
 import { useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { RepoNavInfo } from './RepoNavInfo';
 import Main from '../pages/Main';
 import { GithubStateContext } from '../github/context';
 
@@ -28,10 +29,14 @@ const NavContainer = styled.nav`
 
 export function Nav() {
   const { currentIssue } = useContext(GithubStateContext);
+  const { user = '', repo = '' } = useParams();
   return (
     <NavContainer>
-      <Link to="/">Search Again</Link>
-      {!currentIssue ? <Main /> : null}
+      {!currentIssue ? (
+        <Main />
+      ) : (
+        <RepoNavInfo issue={currentIssue} user={user} repo={repo} />
+      )}
     </NavContainer>
   );
 }

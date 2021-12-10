@@ -1,6 +1,6 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { extractRepoInfo } from '../util/url';
 import { CenteredContainer } from '../components/CenteredContainer';
@@ -61,7 +61,14 @@ const SubmitBtn = styled(InputBase)`
 function Main() {
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const { user, repo } = useParams();
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (user && repo) {
+      inputRef.current.value = `${user}/${repo}`;
+    }
+  }, [user, repo]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -82,7 +89,7 @@ function Main() {
   };
 
   return (
-    <Container onSubmit={submitHandler}>
+    <Container as="form" onSubmit={submitHandler}>
       {error && <ErrorMessage>{error}</ErrorMessage>}
       {/* since we're waiting for submit to change we can get away with a ref */}
       <Row>

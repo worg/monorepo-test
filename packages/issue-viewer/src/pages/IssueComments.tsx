@@ -48,9 +48,7 @@ export function IssueComments() {
   return (
     <div>
       <Link to={basePath}>Back to issues list</Link>
-      <h2>
-        Comments for #{currentIssue?.number}: {currentIssue?.title}
-      </h2>
+      <p>{currentIssue?.body}</p>
       <ListContainer>
         {currentIssue?.comments === 0 && <h3>No comments for this issue</h3>}
         {issueComments.map((comment) => (

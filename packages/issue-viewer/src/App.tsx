@@ -32,9 +32,9 @@ const Container = styled.div`
 function Home() {
   return (
     <AppContainer>
+      <GithubRepoProvider>
       <GlobalStyles />
       <Nav />
-      <GithubRepoProvider>
         <Container>
           <Outlet />
         </Container>

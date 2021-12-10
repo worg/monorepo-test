@@ -37,8 +37,8 @@ export function GithubRepoProvider({
   const [issues, setIssues] = useState<RepoIssue[]>([]);
   const [currentIssue, setCurrentIssue] = useState<RepoIssue | undefined>();
   const [issueComments, setIssueComments] = useState<IssueComment[]>([]);
-  const [loading, setLoading] = useState(Boolean(params.user && params.repo));
-  const [error, setError] = useState(loading ? '' : 'Missing data');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     // we don't want to pick all params here so I don't destructure
@@ -61,8 +61,9 @@ export function GithubRepoProvider({
         setIssues(issues);
       } catch (_) {
         setError('Error fetching data, please verify and retry');
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
     fetchIssues();
   }, [params.user, params.repo]);
@@ -70,7 +71,12 @@ export function GithubRepoProvider({
   useEffect(() => {
     const user = params.user;
     const repo = params.repo;
-    if (!user || !repo || !params.id) {
+    if (!user || !repo) {
+      return;
+    }
+
+    if (!params.id) {
+      setCurrentIssue(undefined);
       return;
     }
 
@@ -90,13 +96,13 @@ export function GithubRepoProvider({
           id,
         });
 
-        console.warn('IC:', issueComments);
         setCurrentIssue(filterCurrentIssue(issues, id));
         setIssueComments(issueComments);
       } catch (_) {
         setError('Error fetching data, please verify and retry');
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
     fetchIssueComments();
   }, [params.user, params.repo, params.id, issues]);
