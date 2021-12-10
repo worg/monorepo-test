@@ -7,5 +7,8 @@
     "precommit": "lint-staged"
   },
   "author": "Hiram Perez <hi@worg.xyz>",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "main": "dist/index.js",
+  "module": "dist/index.module.js",
+  "source": "src/index.tsx"
 }
