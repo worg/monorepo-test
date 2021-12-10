@@ -71,17 +71,18 @@ export function GithubRepoProvider({
   useEffect(() => {
     const user = params.user;
     const repo = params.repo;
+
     if (!user || !repo) {
       return;
     }
 
-    if (!params.id) {
+    if (!params.id && currentIssue !== undefined) {
       setCurrentIssue(undefined);
       return;
     }
 
     const id = parseInt(params.id, 10);
-    if (currentIssue?.number === id) {
+    if (currentIssue?.number === id || isNaN(id)) {
       // do nothing if we'have already the data
       return;
     }
