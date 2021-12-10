@@ -1,14 +1,21 @@
 import { Outlet } from 'react-router-dom';
 import styled, { createGlobalStyle } from 'styled-components';
 import { Nav } from './components/Nav';
+import { GithubRepoProvider } from './github/context';
 
 const GlobalStyles = createGlobalStyle`
 body {
   padding: 0;
   margin: 0;
   height: 100vh;
-  background: #fafbfa;
-  font-family: sans-serif;
+  background: #252628;
+  font-family: 'Readex Pro',sans-serif;
+  color: #fafafc
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
 `;
 
@@ -27,9 +34,11 @@ function Home() {
     <AppContainer>
       <GlobalStyles />
       <Nav />
-      <Container>
-        <Outlet />
-      </Container>
+      <GithubRepoProvider>
+        <Container>
+          <Outlet />
+        </Container>
+      </GithubRepoProvider>
     </AppContainer>
   );
 }

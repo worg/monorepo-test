@@ -28,8 +28,8 @@ export const ListItem = styled.div`
   transition: background-color, box-shadow 125ms ease-in-out;
 
   :hover {
-    background-color: #ccc;
-    box-shadow: 0 0 5px 0 rgba(120, 120, 150, 0.5);
+    background-color: #111;
+    box-shadow: 0 0 7px 1px #000;
   }
 
   @media screen and (max-width: 768px) {

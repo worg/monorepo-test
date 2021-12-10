@@ -17,9 +17,13 @@ const Avatar = styled.img`
   border-radius: 100%;
 `;
 
+const CommentContainer = styled(ListItem)`
+  pointer-events: none;
+`;
+
 function CommentItem({ comment }: { comment: IssueComment }) {
   return (
-    <ListItem as="li">
+    <CommentContainer as="li">
       <UserField>
         <Avatar src={comment.user?.avatar_url} />
         {comment.user?.login}
@@ -32,7 +36,7 @@ function CommentItem({ comment }: { comment: IssueComment }) {
           on: <span> {comment.created_at}</span>
         </ListItemField>
       </ListItemField>
-    </ListItem>
+    </CommentContainer>
   );
 }
 

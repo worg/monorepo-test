@@ -3,42 +3,58 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { extractRepoInfo } from '../util/url';
+import { CenteredContainer } from '../components/CenteredContainer';
 
-const Container = styled.main`
-  display: flex;
+const Container = styled(CenteredContainer)`
+  flex: 1;
+`;
+
+const Row = styled.div`
   width: 100%;
-  justify-content: center;
+  display: flex;
   align-items: center;
-  flex-flow: column;
+  justify-content: center;
 `;
 
 const InputBase = styled.input`
   margin: 1rem 0;
   padding: 0.5rem;
   border-radius: 4px;
-  border: 1px solid #bbb;
-  outline: 2px #ccc;
+  border: 1px solid #bababc;
+  font-family: inherit;
 `;
 
 const Input = styled(InputBase)`
   width: 80%;
+  border-width: 2px;
+  box-shadow: 0 0 0 0 #ccc;
+  outline: none;
+  transition: box-shadow 125ms ease-in-out;
+  font-size: 1.1rem;
+
+  :hover,
+  :focus {
+    box-shadow: 0 0 0 1px #ccc;
+  }
 `;
 
 const SubmitBtn = styled(InputBase)`
   cursor: pointer;
-  background: #f0f0f0;
   text-transform: uppercase;
-  transition: background, box-shadow 125ms ease-in-out;
+  font-weight: bold;
+  background: #f0f0f0;
+  color: #000;
+  font-size: 1.1rem;
   box-shadow: 0 3px 0 0 rgba(120, 150, 120, 0.5);
+  transition: background, box-shadow 125ms ease-in-out;
 
   :hover {
     background: #ccc;
-    box-shadow: 0 3px 0 0 rgba(120, 150, 120, 0.5), 0 3px 5px #bbb;
   }
 
   :focus,
   :active {
-    box-shadow: 0 0 0 0 rgba(120, 150, 120, 0.5);
+    box-shadow: inherit;
   }
 `;
 
@@ -47,7 +63,8 @@ function Main() {
   const navigate = useNavigate();
   const [error, setError] = useState('');
 
-  const OnSubmit = () => {
+  const submitHandler = (e) => {
+    e.preventDefault();
     const url = inputRef.current?.value;
     if (!url) {
       setError('Enter a GitHub URL');
@@ -65,19 +82,20 @@ function Main() {
   };
 
   return (
-    <Container>
-      <h2>Issue Explorer</h2>
+    <Container onSubmit={submitHandler}>
       {error && <ErrorMessage>{error}</ErrorMessage>}
       {/* since we're waiting for submit to change we can get away with a ref */}
-      <Input
-        ref={inputRef}
-        required
-        type="url"
-        placeholder="Enter a Github Repository URL"
-      />
-      <SubmitBtn as="button" onClick={OnSubmit}>
-        Submit
-      </SubmitBtn>
+      <Row>
+        <Input
+          ref={inputRef}
+          required
+          type="url"
+          placeholder="Enter a Github Repository URL or user/repo combination"
+        />
+        <SubmitBtn as="button" type="submit" onClick={submitHandler}>
+          Submit
+        </SubmitBtn>
+      </Row>
     </Container>
   );
 }
