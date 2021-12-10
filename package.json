@@ -5,6 +5,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint:all": "npm run --workspaces lint:fix",
     "build": "parcel build packages/*",
+    "dev:issue-viewer": "parcel -p 1234 packages/issue-viewer",
+    "dev:user-stats": "parcel -p 1235 packages/user-stats",
+    "dev": "npm run dev:issue-viewer & npm run dev:user-stats",
     "prepare": "husky install"
   },
   "author": "Hiram Perez <hi@worg.xyz>",
