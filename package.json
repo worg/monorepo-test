@@ -5,8 +5,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint:all": "npm run --workspaces lint:fix",
     "build": "parcel build packages/*",
-    "dev:issue-viewer": "npm --workspace=issue-viewer exec parcel -- -p 1234",
-    "dev:user-stats": "npm --workspace=user-stats exec parcel -- -p 1235",
+    "dev:issue-viewer": "npm --workspace=issue-viewer exec parcel serve -- -p 1234",
+    "dev:user-stats": "npm --workspace=user-stats exec parcel serve -- -p 1235",
     "dev": "npm-run-all --parallel --aggregate-output dev:*",
     "prepare": "husky install"
   },
