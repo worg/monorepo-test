@@ -5,9 +5,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint:all": "npm run --workspaces lint:fix",
     "build": "parcel build packages/*",
-    "dev:issue-viewer": "parcel -p 1234 packages/issue-viewer",
-    "dev:user-stats": "parcel -p 1235 packages/user-stats",
-    "dev": "npm run dev:issue-viewer & npm run dev:user-stats",
+    "dev:issue-viewer": "npm --workspace=issue-viewer exec parcel -- -p 1234",
+    "dev:user-stats": "npm --workspace=user-stats exec parcel -- -p 1235",
+    "dev": "npm-run-all --parallel --aggregate-output dev:*",
     "prepare": "husky install"
   },
   "author": "Hiram Perez <hi@worg.xyz>",
@@ -22,6 +22,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.1.2",
+    "npm-run-all": "^4.1.5",
     "parcel": "^2.0.1",
     "prettier": "^2.5.1"
   },
